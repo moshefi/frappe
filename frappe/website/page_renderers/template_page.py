@@ -16,6 +16,7 @@ from frappe.website.utils import (
 	get_toc,
 	is_binary_file,
 )
+from frappe.utils.jinja_globals import is_rtl
 
 PY_LOADER_SUFFIXES = tuple(all_suffixes())
 
@@ -166,6 +167,9 @@ class TemplatePage(BaseTemplatePage):
 				self.context.update(data)
 			# TODO: self.context.children = self.run_pymodule_method('get_children')
 
+		if self.context.template.endswith(".html") and is_rtl():
+			self.context.layout_direction = "rtl"
+		
 		self.context.developer_mode = frappe.conf.developer_mode
 		if self.context.http_status_code:
 			self.http_status_code = self.context.http_status_code

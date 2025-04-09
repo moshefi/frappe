@@ -7,6 +7,7 @@ from frappe.website.router import (
 	get_page_info_from_web_page_with_dynamic_routes,
 )
 from frappe.website.utils import cache_html
+from frappe.utils.jinja_globals import is_rtl
 
 
 class DocumentPage(BaseTemplatePage):
@@ -52,9 +53,13 @@ class DocumentPage(BaseTemplatePage):
 		return frappe.get_template(self.template_path).render(self.context)
 
 	def update_context(self):
+		from frappe import local
 		self.context.doc = self.doc
 		self.context.update(self.context.doc.as_dict())
 		self.context.update(self.context.doc.get_page_info())
+
+		if is_rtl():
+			self.context.layout_direction = "rtl"
 
 		self.template_path = self.context.template or self.template_path
 

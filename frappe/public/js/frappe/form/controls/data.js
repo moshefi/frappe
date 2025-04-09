@@ -10,6 +10,7 @@ frappe.ui.form.ControlData = class ControlData extends frappe.ui.form.ControlInp
 		let { html_element, input_type } = this.constructor;
 
 		this.$input = $("<" + html_element + ">")
+			.attr("aria-labelledby", "_lbl_" + this.df.fieldname)
 			.attr("type", input_type)
 			.attr("autocomplete", "off")
 			.addClass("input-with-feedback form-control")
@@ -227,6 +228,7 @@ frappe.ui.form.ControlData = class ControlData extends frappe.ui.form.ControlInp
 		}
 
 		this.$input
+			.attr("aria-labelledby", "_lbl_" + this.df.fieldname)
 			.attr("data-fieldtype", this.df.fieldtype)
 			.attr("data-fieldname", this.df.fieldname)
 			.attr("placeholder", this.df.placeholder || "");

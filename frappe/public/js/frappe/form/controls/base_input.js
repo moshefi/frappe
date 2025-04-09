@@ -16,7 +16,7 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 				`<div class="frappe-control">
 				<div class="form-group">
 					<div class="clearfix">
-						<label class="control-label" style="padding-right: 0px;"></label>
+						<label class="control-label" style="padding-right: 0px;" id="_lbl_${this.df.fieldname}"></label>
 						<span class="help"></span>
 					</div>
 					<div class="control-input-wrapper">
